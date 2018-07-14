@@ -1,12 +1,12 @@
 package com.gogo.services.BookDatabase.hi;
 
-public class Airline {
+public class FamilyDetail {
 	
-public Airline() {
+public FamilyDetail() {
 		
 	}
 	
-	public Airline(String id, String name, String description) {
+	public FamilyDetail(String id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
