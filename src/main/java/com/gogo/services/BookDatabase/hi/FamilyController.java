@@ -3,6 +3,9 @@ package com.gogo.services.BookDatabase.hi;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +28,11 @@ public class FamilyController {
 		return familyservices.GetFamilyDetails() ;
 	}
 	
-	@RequestMapping("/familydetails/{id}")
-	public FamilyDetail SpecificFamily(@PathVariable String id){
-		return familyservices.SpecificFamilyMember(id);
+	@RequestMapping(value ="/familydetails/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<FamilyDetail> SpecificFamily(@PathVariable String id){
+		FamilyDetail fes = familyservices.SpecificFamilyMember(id);
+		return new ResponseEntity<FamilyDetail>(fes, HttpStatus.BAD_REQUEST);
+		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/addfamily"	)
