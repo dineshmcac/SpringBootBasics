@@ -1,7 +1,12 @@
 package com.gogo.services.BookDatabase.hi;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +23,33 @@ public class FamilyController {
 	@Autowired
 	private FamilyService familyservices;
 	
-	@RequestMapping("/hi")
-	public String helloPrint() {
-		return "Hi";
+	@RequestMapping("/multipleof/{value}")
+	public Map<String, String> helloPrint(@PathVariable int value) {
+		//StringBuilder appendString = new StringBuilder("API");
+		Map<String,String> hi =new LinkedHashMap<String,String>();
+		
+		for (int i = 1; i <= value; i++) {
+			if (i % 3 == 0 && i % 5 == 0)
+				hi.put(Integer.toString(i), "Multiple of 3 & 5");
+				//appendString.append(Integer.toString(i) + " - Multiple of 3 & 5" + System.getProperty("line.separator") );
+				//System.out.println(i + " - Multiple of 3 & 5");
+			else if (i % 3 == 0)
+				hi.put(Integer.toString(i), "Multiple of 3");
+				//appendString.append(Integer.toString(i)+ " - Multiple of 3 " + System.getProperty("line.separator"));
+				//System.out.println(i + " - Multiple of 3");
+			else if (i % 5 == 0)
+				hi.put(Integer.toString(i), "Multiple of 5");
+				//appendString.append(Integer.toString(i)+ " - Multiple of 5" + System.getProperty("line.separator"));
+				
+				//System.out.println(i + " - Multiple of 5");
+			else {
+				hi.put(Integer.toString(i), " Not Multiple of 3 & 5");
+				//appendString.append(Integer.toString(i) + System.getProperty("line.separator"));
+			}
+				//System.out.println(i);
+		}
+		
+		 return hi;
 	}
 	
 	@RequestMapping("/familydetails")
